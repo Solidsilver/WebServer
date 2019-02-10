@@ -50,6 +50,20 @@ final class HttpRequest implements Runnable {
         while ((headerLine = br.readLine()).length() != 0) {
             System.out.println(headerLine);
         }
+
+        if (requestLine.startsWith("GET")) {
+            getRequest(requestLine, os);
+        } else {
+            os.writeBytes("HTTP/1.0 501 Not Implemented");
+            os.writeBytes(CRLF);
+        }
+        // Close streams and socket.
+        os.close();
+        br.close();
+        socket.close();
+    }
+
+    private void getRequest(String requestLine, DataOutputStream os) throws Exception {
         // Extract the filename from the request line.
         StringTokenizer tokens = new StringTokenizer(requestLine);
         tokens.nextToken(); // skip over the method, which should be "GET"
@@ -97,14 +111,6 @@ final class HttpRequest implements Runnable {
         } else {
             os.writeBytes(entityBody);
         }
-
-        // Close streams and socket.
-        os.close();
-        br.close();
-        socket.close();
-
-        
-
     }
 
     private static void sendBytes(InputStream is, OutputStream os) throws Exception {
