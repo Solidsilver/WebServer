@@ -8,7 +8,7 @@ public final class WebServer {
 
         ServerSocket serverSocket = new ServerSocket(port);
 
-        //Load up list of MIME types.
+        // Load up list of MIME types.
         MIMETypeList mTypes = new MIMETypeList();
 
         // Process HTTP service requests in an infinite loop.

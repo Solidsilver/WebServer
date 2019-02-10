@@ -12,13 +12,13 @@ import java.util.StringTokenizer;
 
 final class HttpRequest implements Runnable {
     final static String CRLF = "\r\n";
-    Socket socket;
-    MIMETypeList mTypes;
+    private Socket socket;
+    private MIMETypeList mTypes;
 
     // Constructor
     public HttpRequest(DataPass fromServer) throws Exception {
-        this.socket = fromServer.socket;
-        this.mTypes = fromServer.mType;
+        this.socket = fromServer.getSocket();
+        this.mTypes = fromServer.getTypeList();
     }
 
     // Implement the run() method of the Runnable interface.
@@ -124,7 +124,7 @@ final class HttpRequest implements Runnable {
         }
     }
 
-    //Depricated by MIMETypeList class
+    // Depricated by MIMETypeList class
     private static String contentType(String fileName) {
         if (fileName.endsWith(".htm") || fileName.endsWith(".html")) {
             return "text/html";

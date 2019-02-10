@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 final class MIMETypeList {
-    HashMap<String, String> typeList;
+    private HashMap<String, String> typeList;
 
     public MIMETypeList() {
         try {
@@ -30,9 +30,8 @@ final class MIMETypeList {
         return type;
     }
 
-    public static HashMap<String, String> loadMimeTypes() throws FileNotFoundException {
+    private static HashMap<String, String> loadMimeTypes() throws FileNotFoundException {
         HashMap<String, String> types = new HashMap<>(100);
-        //URL path = MIMETypeList.class.getResource("MIMEtypes.csv").getFile();
         FileInputStream fin = new FileInputStream(MIMETypeList.class.getResource("MIMEtypes.csv").getFile());
         Scanner sc = new Scanner(fin).useDelimiter(",");
         while (sc.hasNextLine()) {
