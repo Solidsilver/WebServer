@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
@@ -15,7 +16,6 @@ final class HttpRequest implements Runnable {
     private Socket socket;
     private MIMETypeList mTypes;
 
-    // Constructor
     public HttpRequest(DataPass fromServer) throws Exception {
         this.socket = fromServer.getSocket();
         this.mTypes = fromServer.getTypeList();
@@ -25,20 +25,26 @@ final class HttpRequest implements Runnable {
     public void run() {
         try {
             processRequest();
-        } catch (Exception e) {
+        } catch (IOException io) {
+            System.out.print("Socket I/O Error: ");
+            System.out.println(io);
+        }
+        catch (Exception e) {
+            System.out.println("There was an error processing the request");
             System.out.println(e);
         }
     }
 
     private void processRequest() throws Exception {
         MIMETypeList typeList = new MIMETypeList();
+
         // Get a reference to the socket's input and output streams.
         InputStream is = this.socket.getInputStream();
         DataOutputStream os = new DataOutputStream(this.socket.getOutputStream());
-
         // Set up input stream filters.
         InputStreamReader inRead = new InputStreamReader(is);
         BufferedReader br = new BufferedReader(inRead);
+
         // Get the request line of the HTTP request message.
         String requestLine = br.readLine();
 
@@ -68,11 +74,9 @@ final class HttpRequest implements Runnable {
         StringTokenizer tokens = new StringTokenizer(requestLine);
         tokens.nextToken(); // skip over the method, which should be "GET"
         String fileName = tokens.nextToken();
-        // System.out.println("Wants File: (" + fileName + ")");
         if (fileName.equals("/")) {
             fileName += "index.html";
         }
-        // System.out.println("Giving file: (" + fileName + ")");
 
         // Prepend a "." so that file request is within the current directory.
         fileName = "." + fileName;
@@ -122,20 +126,6 @@ final class HttpRequest implements Runnable {
         while ((bytes = is.read(buffer)) != -1) {
             os.write(buffer, 0, bytes);
         }
-    }
-
-    // Depricated by MIMETypeList class
-    private static String contentType(String fileName) {
-        if (fileName.endsWith(".htm") || fileName.endsWith(".html")) {
-            return "text/html";
-        }
-        if (fileName.endsWith(".gif")) {
-            return "image/gif";
-        }
-        if (fileName.endsWith(".jpeg") || fileName.endsWith(".jpg")) {
-            return "image/jpeg";
-        }
-        return "application/octet-stream";
     }
 
 }

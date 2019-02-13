@@ -5,14 +5,14 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
-final class MIMETypeList {
+public class MIMETypeList {
     private HashMap<String, String> typeList;
 
     public MIMETypeList() {
         try {
             this.typeList = loadMimeTypes();
         } catch (FileNotFoundException e) {
-            // TODO Auto-generated catch block
+            System.out.println("Could not load MIMETypes.csv");
             e.printStackTrace();
         }
     }

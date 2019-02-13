@@ -2,7 +2,9 @@ package WebServer;
 
 import java.net.Socket;
 
-final class DataPass {
+
+//Used to pass any data from server to thread as one object
+public class DataPass {
     private Socket socket;
     private MIMETypeList mType;
 
