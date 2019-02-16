@@ -4,8 +4,10 @@ import java.net.*;
 
 public final class WebServer {
     public static void main(String argv[]) throws Exception {
+        //Default port
         int port = 4756;
 
+        //Check for port as CLI argument
         if (argv.length > 0) {
             try {
                 port = Integer.parseInt(argv[0]);

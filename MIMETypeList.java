@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Scanner;
 
+//Class used to generate a Hash Table of MIME types, and parse type based on extension
 public class MIMETypeList {
     private HashMap<String, String> typeList;
 
