@@ -37,7 +37,6 @@ final class HttpRequest implements Runnable {
     }
 
     private void processRequest() throws Exception {
-        MIMETypeList typeList = new MIMETypeList();
 
         // Get a reference to the socket's input and output streams.
         InputStream is = this.socket.getInputStream();
