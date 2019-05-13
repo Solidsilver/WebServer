@@ -5,6 +5,7 @@ import java.math.BigInteger;
 import java.util.Random;
 
 public class KeyPair implements Serializable {
+    private static final long serialVersionUID = 1L;
     private Key privKey;
     private Key pubKey;
 
