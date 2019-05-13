@@ -1,4 +1,4 @@
-package WebServer;
+package WebServer.mime;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;

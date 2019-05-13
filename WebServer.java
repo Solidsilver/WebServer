@@ -1,6 +1,7 @@
 package WebServer;
 
 import java.net.*;
+import WebServer.mime.*;
 
 public final class WebServer {
     public static void main(String argv[]) throws Exception {

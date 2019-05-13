@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
 import java.util.StringTokenizer;
+import WebServer.mime.*;
 
 final class HttpRequest implements Runnable {
     final static String CRLF = "\r\n";

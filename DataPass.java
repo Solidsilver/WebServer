@@ -1,7 +1,7 @@
 package WebServer;
 
 import java.net.Socket;
-
+import WebServer.mime.*;
 
 //Used to pass any data from server to thread as one object
 public class DataPass {
