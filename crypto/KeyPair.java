@@ -22,11 +22,11 @@ public class KeyPair implements Serializable {
         return this.privKey;
     }
 
-    public static KeyPair generateKeyPair(int primeSize) {
+    public static KeyPair generateKeyPair(int keyLength) {
         Key privKey = null;
         Key pubKey = null;
-        BigInteger p = BigInteger.probablePrime(primeSize, new Random());
-        BigInteger q = BigInteger.probablePrime(primeSize, new Random());
+        BigInteger p = BigInteger.probablePrime((int)primeSize/2, new Random());
+        BigInteger q = BigInteger.probablePrime((int)primeSize/2, new Random());
         BigInteger n = p.multiply(q);
         BigInteger ph = lcm(p.subtract(BigInteger.ONE), q.subtract(BigInteger.ONE));
         BigInteger e;
